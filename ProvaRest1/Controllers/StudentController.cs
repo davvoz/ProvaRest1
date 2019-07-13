@@ -18,7 +18,7 @@ namespace ProvaRest1.Controllers
             return response;
         }
 
-        [Route("PostAddFamiglia")]
+        [Route("addStudent")]
         public HttpResponseMessage PostAddStudent(Student student)
         {
             students.Add(student);
