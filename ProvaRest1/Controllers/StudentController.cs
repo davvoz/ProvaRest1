@@ -1,4 +1,5 @@
-﻿using ProvaRest1.Models;
+﻿using ProvaRest1.Biz;
+using ProvaRest1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,14 @@ namespace ProvaRest1.Controllers
 {
     public class StudentController : ApiController
     {
-        public List<Student> students;
+        public static List<Student> students = new List<Student>();
+        [Route("students")]
+        public HttpResponseMessage GetStudents()
+        {
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, students);
+            return response;
+        }
+
         [Route("age")]
         public HttpResponseMessage GetMessage(String birthday)
         {
@@ -23,6 +31,23 @@ namespace ProvaRest1.Controllers
         {
             students.Add(student);
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, students);
+            return response;
+        }
+
+        [Route("getStudent")]
+        public HttpResponseMessage GetStudent(String name)
+        {
+            var query = from Student s in students
+                        where s.Firstname == name
+                        select s;
+            
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK,query);
+            return response;
+        }
+        [Route("faseUno")]
+        public object GetFiboQuestion(int number)
+        {
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, Common.SearchIntoFibonacciSequence(number));
             return response;
         }
     }
