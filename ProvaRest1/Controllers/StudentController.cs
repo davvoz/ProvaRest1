@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProvaRest1.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,16 +10,19 @@ namespace ProvaRest1.Controllers
 {
     public class StudentController : ApiController
     {
+        public List<Student> students;
         [Route("age")]
         public HttpResponseMessage GetMessage(String birthday)
         {
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, Models.Student.CalcolaAge(birthday));
             return response;
         }
-        [Route("age")]
-        public HttpResponseMessage GetMessage1(String birthday)
+
+        [Route("PostAddFamiglia")]
+        public HttpResponseMessage PostAddStudent(Student student)
         {
-            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, Models.Student.CalcolaAge(birthday));
+            students.Add(student);
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, students);
             return response;
         }
     }
