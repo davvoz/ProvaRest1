@@ -10,7 +10,20 @@ namespace ProvaRest1.Biz
 {
     public class Common
     {
-        public static String SearchIntoFibonacciSequence(int numeroCaratteri)
+        public static int CalcolaAge(String Birthday)
+        {
+
+            DateTime today = DateTime.Today;
+            DateTime birthday = DateTime.ParseExact(Birthday, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            int age = today.Year - birthday.Year;
+
+            if (birthday.Date > today.AddYears(-age))
+                age--;
+
+            return age;
+
+        }
+        public static String SearchFirstOccurencyTotCharFibonacci(int numeroCaratteri)
         {
            
             Boolean trovato = false;
