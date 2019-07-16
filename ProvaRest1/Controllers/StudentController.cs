@@ -47,5 +47,12 @@ namespace ProvaRest1.Controllers
             return response;
         }
 
+        [Route("media")]
+        public HttpResponseMessage GetMediaVoti(String StringaVoti)
+        {
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, Student.Avg_grade(StringaVoti));
+            return response;
+        }
+
     }
 }
